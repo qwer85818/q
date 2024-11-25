@@ -6,115 +6,110 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Happy Today</title>
     <link rel="shortcut icon" href="https://static.mediacdn.vn/baochinhphu/image/favicon1.png" type="image/x-icon">
-
     <style>
-        /* Global styles */
-        body {
-            font-family: Arial, sans-serif;
+        /* Resetting some basic styles */
+        body, h1, h2, p {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
         }
-
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        section {
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
+        /* Layout styles */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
             padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+        }
+        .sidebar {
+            flex: 1;
+            padding: 10px;
+            background-color: #f4f4f4;
+            margin-right: 10px;
+        }
+        .content {
+            flex: 3;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        .article-link {
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .article-link:hover {
+            background-color: #ddd;
+        }
+        .highlight {
+            border: 2px solid red;
         }
 
-        /* Responsive styles */
+        /* Responsive design */
         @media (max-width: 768px) {
-            header {
-                font-size: 1.2em;
+            .container {
+                flex-direction: column;
             }
-
-            nav ul {
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            nav ul li {
-                display: block;
-                margin: 10px 0;
-            }
-
-            section {
-                font-size: 0.9em;
-            }
-
-            footer {
-                font-size: 0.9em;
-                padding: 15px;
-            }
-        }
-
-        /* Extra small devices (phones, portrait) */
-        @media (max-width: 480px) {
-            header {
-                font-size: 1em;
-            }
-
-            nav ul li {
-                margin-right: 10px;
-            }
-
-            section {
-                font-size: 0.8em;
+            .sidebar {
+                margin-right: 0;
+                margin-bottom: 10px;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Welcome to My Website</h1>
-        <nav>
-            <ul>
-                <li><a href="/q">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Home Page (with article list and welcome content) -->
+    <div class="container">
+        <div class="sidebar">
+            <h2>Article List</h2>
+            <div id="article1" class="article-link" onclick="showArticle('article1')">How to Learn HTML</div>
+            <div id="article2" class="article-link" onclick="showArticle('article2')">Understanding CSS Flexbox</div>
+            <div id="article3" class="article-link" onclick="showArticle('article3')">JavaScript Basics</div>
+            <div id="article4" class="article-link" onclick="showArticle('article4')">Responsive Web Design</div>
+        </div>
 
-    <section>
-        <h2>About This Page</h2>
-        <p>This is a simple webpage template with basic HTML structure. You can modify and extend it to suit your needs.</p>
-    </section>
+        <div class="content">
+            <h1>Welcome to My Blog</h1>
+            <p>This is a simple blog website with articles about web development.</p>
+            <div id="article-content">
+                <h2>Choose an article to read</h2>
+                <p>Select an article from the left to view its content.</p>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 My Website</p>
-    </footer>
+    <script>
+        // Function to display content and highlight selected article
+        function showArticle(articleId) {
+            // Highlight the selected article link
+            let articleLinks = document.querySelectorAll('.article-link');
+            articleLinks.forEach(link => link.classList.remove('highlight'));
+            document.getElementById(articleId).classList.add('highlight');
+
+            // Set the content based on the selected article
+            let content = '';
+            switch(articleId) {
+                case 'article1':
+                    content = '<h2>How to Learn HTML</h2><p>HTML is the backbone of any website...</p>';
+                    break;
+                case 'article2':
+                    content = '<h2>Understanding CSS Flexbox</h2><p>Flexbox is a powerful layout tool...</p>';
+                    break;
+                case 'article3':
+                    content = '<h2>JavaScript Basics</h2><p>JavaScript is the programming language of the web...</p>';
+                    break;
+                case 'article4':
+                    content = '<h2>Responsive Web Design</h2><p>Responsive design ensures your website works well on all devices...</p>';
+                    break;
+                default:
+                    content = '<h2>Choose an article to read</h2><p>Select an article from the left to view its content.</p>';
+            }
+
+            // Display content
+            document.getElementById('article-content').innerHTML = content;
+        }
+    </script>
 
 </body>
 </html>
-
